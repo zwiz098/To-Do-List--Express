@@ -5,9 +5,6 @@
 
 
 
-
-
-
 const ul = document.querySelector('.list')
 const input = document.querySelector('#input')
 document.querySelector('#addItem').addEventListener('click', addToList)
@@ -26,6 +23,26 @@ ul.addEventListener("click", function(e) {
     }
 })
 
+
+var myNodelist = document.getElementsByTagName("li");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
 //Create
 
 function addToList(e){
@@ -45,7 +62,6 @@ function addToList(e){
 //  // e.preventDefault()
 //   console.log(ev.target)
 // }
-
 // document.querySelectorAll('li.item') for each (element => element.remove())
 // Create a function that when you click the button "clear" the crossed out items are deleted from the list.
 function clearSelectedItems() {
@@ -53,18 +69,19 @@ function clearSelectedItems() {
 //
 //
 let deleteItem = ul.querySelectorAll('.crossItem')
-deleteItem.forEach(li => {
-  ul.removeChild(li)
+let lli = document.getElementsByClassName('.hiddenItem')
+deleteItem.forEach(lli => {
+  ul.removeChild(lli)
+
 })
 // ul.addChild.(hideItem)
     //
     // let crossedItem = document.getElementsByClassName('crossItem')
     // crossedItem.style.backgroundColor = "purple"
-
 }
 
 function clearAll(){
-  let deleteItem = ul.querySelectorAll('.item')
+  let deleteItem = ul.querySelectorAll('li')
   deleteItem.forEach(li => {
     ul.removeChild(li)
   })
